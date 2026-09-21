@@ -4,12 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Portfolio</title>
+
   <style>
     :root {
       --bg: #ffffff;
       --text: #0f172a;
+      --muted: #6b6b80;
       --border: #e5e7eb;
-      --focus: #2563eb;
+      --blue: #2563eb;
+      --purple: #9333ea;
+      --gradient: linear-gradient(90deg, var(--blue), var(--purple));
     }
 
     * { box-sizing: border-box; }
@@ -21,13 +25,13 @@
       color: var(--text);
     }
 
+    /* ---------- Navbar ---------- */
     .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 48px;
       height: 68px;
-      background: var(--bg);
       border-bottom: 1px solid var(--border);
     }
 
@@ -70,11 +74,87 @@
     .nav-links a:hover { opacity: 0.6; }
 
     a:focus-visible {
-      outline: 2px solid var(--focus);
+      outline: 2px solid var(--blue);
       outline-offset: 4px;
       border-radius: 4px;
     }
 
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: 64px 48px;
+      max-width: 900px;
+    }
+
+    .hero-title {
+      margin: 0 0 24px;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.2;
+      min-height: 1.2em;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.9em;
+      margin-left: 2px;
+      vertical-align: -0.05em;
+      background: var(--purple);
+      animation: blink 0.9s steps(1) infinite;
+    }
+
+    .cursor.done { display: none; }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-text {
+      margin: 0 0 40px;
+      font-size: 20px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 48px;
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 14px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #fff;
+      background: var(--gradient);
+      box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 14px 30px rgba(147, 51, 234, 0.4);
+    }
+
+    .btn-outline {
+      color: #000;
+      background: #fff;
+      border: 3px solid var(--purple);
+      padding: 13px 48px;
+    }
+
+    /* ---------- Mobil ---------- */
     @media (max-width: 600px) {
       .navbar {
         padding: 12px 16px;
@@ -85,13 +165,24 @@
       }
       .nav-links { gap: 20px; }
       .nav-links a { font-size: 16px; }
+
+      .hero { padding: 40px 16px; }
+      .hero-title { font-size: 26px; }
+      .hero-text { font-size: 17px; }
+      .btn { padding: 14px 32px; font-size: 18px; }
+      .btn-outline { padding: 11px 32px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
     }
   </style>
 </head>
+
 <body>
 
   <header class="navbar">
-    <a href="#" class="logo" aria-label="Portfolio – Startseite">
+    <a href="#home" class="logo" aria-label="Portfolio – Startseite">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <polyline points="8 6 2 12 8 18"></polyline>
         <polyline points="16 6 22 12 16 18"></polyline>
@@ -108,6 +199,44 @@
       </ul>
     </nav>
   </header>
+
+  <section class="hero" id="home">
+    <h1 class="hero-title" id="typed" data-text="Full Stack Developer &amp; Designer"></h1>
+    <p class="hero-text">
+      I build modern web applications with a focus on clean code, user experience,
+      and scalable architecture. Passionate about turning ideas into elegant
+      digital solutions.
+    </p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </section>
+
+  <script>
+    // Tipp-Effekt für den Titel
+    const typed = document.getElementById("typed");
+    const fullText = typed.dataset.text;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion) {
+      typed.textContent = fullText;
+    } else {
+      const textNode = document.createTextNode("");
+      const cursor = document.createElement("span");
+      cursor.className = "cursor";
+      typed.append(textNode, cursor);
+
+      let i = 0;
+      const timer = setInterval(() => {
+        textNode.data = fullText.slice(0, ++i);
+        if (i >= fullText.length) {
+          clearInterval(timer);
+          setTimeout(() => cursor.classList.add("done"), 800);
+        }
+      }, 55);
+    }
+  </script>
 
 </body>
 </html>

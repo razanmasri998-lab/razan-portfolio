@@ -105,3 +105,40 @@ if (skillsSection) badgeObserver.observe(skillsSection);
 /* --- Aktives Jahr im Footer --- */
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+// Typewriter-Effekt für id="typed"
+document.addEventListener('DOMContentLoaded', () => {
+
+  const el   = document.getElementById('typed');
+  const text = el.getAttribute('data-text');
+  let   i    = 0;
+
+  // Cursor-Style
+  el.style.borderRight = '3px solid #7c3aed';
+  el.style.paddingRight = '4px';
+  el.style.whiteSpace = 'nowrap';
+  el.style.overflow = 'hidden';
+
+  function type() {
+    if (i < text.length) {
+      el.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, 60);
+    } else {
+      // Cursor blinken lassen nach Ende
+      el.style.animation = 'blink 0.8s step-end infinite';
+    }
+  }
+
+  // CSS für Cursor-Blinken
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes blink {
+      0%, 100% { border-color: #7c3aed; }
+      50%       { border-color: transparent; }
+    }
+  `;
+  document.head.appendChild(style);
+
+  type();
+
+});
