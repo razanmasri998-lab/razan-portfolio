@@ -240,3 +240,238 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Featured Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #7c3aed;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --border: #e5e7eb;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text-primary);
+    }
+
+    .projects-section { padding: 72px 48px; }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--purple);
+      margin-bottom: 36px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--white);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s ease;
+    }
+
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-card:hover {
+      box-shadow: 0 8px 32px rgba(124, 58, 237, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .project-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-body { padding: 20px 22px 24px; }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .project-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--purple);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .project-name:hover { opacity: 0.75; }
+
+    .ext-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+
+    .ext-btn:hover { color: var(--purple); }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .tag {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 14px;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      background: var(--white);
+      transition: border-color 0.2s, color 0.2s;
+      cursor: default;
+    }
+
+    .tag:hover { border-color: var(--purple); color: var(--purple); }
+
+    @media (max-width: 768px) {
+      .projects-section { padding: 48px 20px; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="projects-section" id="projects">
+  <h2 class="section-title">Featured Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card" data-url="#">
+      <img class="project-img" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80" alt="E-Commerce Platform" />
+      <div class="project-body">
+        <div class="project-header">
+          <a href="#" class="project-name">E-Commerce Platform</a>
+          <button class="ext-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </button>
+        </div>
+        <p class="project-desc">A full-stack e-commerce solution with real-time inventory management and payment processing.</p>
+        <div class="tags">
+          <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-url="#">
+      <img class="project-img" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80" alt="Task Management App" />
+      <div class="project-body">
+        <div class="project-header">
+          <a href="#" class="project-name">Task Management App</a>
+          <button class="ext-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </button>
+        </div>
+        <p class="project-desc">Collaborative project management tool with drag-and-drop kanban boards and team features.</p>
+        <div class="tags">
+          <span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Firebase</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-url="#">
+      <img class="project-img" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80" alt="API Gateway Service" />
+      <div class="project-body">
+        <div class="project-header">
+          <a href="#" class="project-name">API Gateway Service</a>
+          <button class="ext-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </button>
+        </div>
+        <p class="project-desc">Scalable microservices gateway with rate limiting, authentication, and request routing.</p>
+        <div class="tags">
+          <span class="tag">Node.js</span><span class="tag">Docker</span><span class="tag">Redis</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-url="#">
+      <img class="project-img" src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=800&q=80" alt="Design System Kit" />
+      <div class="project-body">
+        <div class="project-header">
+          <a href="#" class="project-name">Design System Kit</a>
+          <button class="ext-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </button>
+        </div>
+        <p class="project-desc">Comprehensive UI component library with accessibility built-in and theming support.</p>
+        <div class="tags">
+          <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Storybook</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const cards = document.querySelectorAll('.project-card');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const i = [...cards].indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(card => {
+    observer.observe(card);
+    card.querySelector('.ext-btn').addEventListener('click', () => {
+      const url = card.dataset.url;
+      if (url) window.open(url, '_blank');
+    });
+  });
+</script>
+
+</body>
+</html>

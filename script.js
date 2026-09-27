@@ -142,3 +142,34 @@ document.addEventListener('DOMContentLoaded', () => {
   type();
 
 });
+// ===========================
+// projects.js
+// ===========================
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const cards = document.querySelectorAll('.project-card');
+
+  // Gestaffelte Einblend-Animation per Intersection Observer
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const card = entry.target;
+        const index = [...cards].indexOf(card);
+        setTimeout(() => card.classList.add('visible'), index * 100);
+        observer.unobserve(card);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(card => observer.observe(card));
+
+  // Externe Link-Buttons
+  document.querySelectorAll('.ext-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const url = btn.closest('.project-card').dataset.url;
+      if (url) window.open(url, '_blank');
+    });
+  });
+
+});
